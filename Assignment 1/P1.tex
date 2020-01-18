@@ -1,0 +1,79 @@
+%% AMS-LaTeX Created with the Wolfram Language for Students - Personal Use Only : www.wolfram.com
+
+\documentclass{article}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+\begin{document}
+
+We can generalize the secant method as\\
+\(x_{n+1}=x_n-f\left(x_n\right) \frac{x_n-x_{n-1}}{f\left(x_n\right)-f\left(x_{n-1}\right)}\)\\
+Let{'}s suppose we are looking for the solution to \(f(x)=0\), and we find \(f(\xi )=0\), let{'}s define\\
+\(x_n=\xi +\epsilon _n\)\\
+since this process is iterative, we know that as \(n\to \infty\), \(x\to \xi\), which implies \(\epsilon _{\infty }\to  0\), or the error is very
+small. Since we are looking for the order of convergence, this setup leads to the equation\\
+\(x_{n+1}-\xi =C\left(x_n-\xi \right){}^r\)\\
+which we can express in terms of the error as\\
+\(\epsilon _{n+1}=C \epsilon _n^r\)\\
+and our goal here is to solve for r.\\
+\\
+Let{'}s plug in this new definition of \(x_n\) into the secant method\\
+\(\left(\xi +\epsilon _{n+1}\right)=\left(\xi +\epsilon _n\right)-f\left(\xi +\epsilon _n\right) \frac{\xi +\epsilon _n-\left(\xi +\epsilon _{n-1}\right)}{f\left(\xi
++\epsilon _n\right)-f\left(\xi +\epsilon _{n-1}\right)}\\
+\\
+\epsilon _{n+1}=\epsilon _n-f\left(\xi +\epsilon _n\right) \frac{\epsilon _n-\epsilon _{n-1}}{f\left(\xi +\epsilon _n\right)-f\left(\xi +\epsilon
+_{n-1}\right)}\)\\
+Let{'}s expand the functions using a Taylor Expansion of order 2\\
+\(f\left(\xi +\epsilon _n\right)=f(\xi )+f'(\xi )\epsilon _n+\frac{1}{2}f\text{''}(\xi )\epsilon _n^2\)\\
+We know \(f(\xi )=0\) from earlier, so\\
+\(f\left(\xi +\epsilon _n\right)=f'(\xi )\epsilon _n+\frac{1}{2}f\text{''}(\xi )\epsilon _n^2\)\\
+using a similar idea\\
+\(f\left(\xi +\epsilon _n\right)-f\left(\xi +\epsilon _{n-1}\right)=f'(\xi )\epsilon _n+\frac{1}{2}f\text{''}(\xi )\epsilon _n^2-\left(f'(\xi )\epsilon
+_{n-1}+\frac{1}{2}f\text{''}(\xi )\epsilon _{n-1}^2\right)=f'(\xi )\left(\epsilon _n-\epsilon _{n-1}\right)+\frac{1}{2}f\text{''}(\xi )\left(\epsilon
+_n^2-\epsilon _{n-1}^2\right)\)\\
+making our secant method equation\\
+\(\epsilon _{n+1}=\epsilon _n-\left(f'(\xi )\epsilon _n+\frac{1}{2}f\text{''}(\xi )\epsilon _n^2\right)\frac{\epsilon _n-\epsilon _{n-1}}{f'(\xi
+)\left(\epsilon _n-\epsilon _{n-1}\right)+\frac{1}{2}f\text{''}(\xi )\left(\epsilon _n^2-\epsilon _{n-1}^2\right)}\)\\
+let{'}s look at the fraction\\
+\(\frac{\epsilon _n-\epsilon _{n-1}}{f'(\xi )\left(\epsilon _n-\epsilon _{n-1}\right)+\frac{1}{2}f\text{''}(\xi )\left(\epsilon _n^2-\epsilon _{n-1}^2\right)}=\frac{1}{f'(\xi
+)+\frac{1}{2}f\text{''}(\xi )\frac{\left(\epsilon _n^2-\epsilon _{n-1}^2\right)}{\epsilon _n-\epsilon _{n-1}}}=\frac{1}{f'(\xi )}\frac{1}{1+\frac{1}{2}\frac{f\text{''}(\xi
+)}{f'(\xi )}\frac{\left(\epsilon _n^2-\epsilon _{n-1}^2\right)}{\epsilon _n-\epsilon _{n-1}}}\)\\
+Since the second term in the denominator is so small, we can take the approximation \(\frac{1}{1+x}\to  1-x\) leading to\\
+\(\frac{1}{f'(\xi )}\frac{1}{1+\frac{1}{2}\frac{f\text{''}(\xi )}{f'(\xi )}\frac{\left(\epsilon _n^2-\epsilon _{n-1}^2\right)}{\epsilon _n-\epsilon
+_{n-1}}}=\frac{1}{f'(\xi )}\left(1-\frac{1}{2}\frac{f\text{''}(\xi )}{f'(\xi )}\frac{\left(\epsilon _n^2-\epsilon _{n-1}^2\right)}{\epsilon _n-\epsilon
+_{n-1}}\right)\)\\
+our recurrence relation becomes\\
+\(\epsilon _{n+1}=\epsilon _n-\left(f'(\xi )\epsilon _n+\frac{1}{2}f\text{''}(\xi )\epsilon _n^2\right)\frac{1}{f'(\xi )}\left(1-\frac{1}{2}\frac{f\text{''}(\xi
+)}{f'(\xi )}\frac{\left(\epsilon _n^2-\epsilon _{n-1}^2\right)}{\epsilon _n-\epsilon _{n-1}}\right)\\
+\\
+\epsilon _{n+1}=\epsilon _n-\left(\epsilon _n+\frac{1}{2}\frac{f\text{''}(\xi )}{f'(\xi )}\epsilon _n^2\right)\left(1-\frac{1}{2}\frac{f\text{''}(\xi
+)}{f'(\xi )}\frac{\left(\epsilon _n^2-\epsilon _{n-1}^2\right)}{\epsilon _n-\epsilon _{n-1}}\right)\\
+\\
+\epsilon _{n+1}= \left(\frac{1}{2}\frac{f\text{''}(\xi )}{f'(\xi )}\right)^2 \epsilon _n^3+\left(\frac{1}{2}\frac{f\text{''}(\xi )}{f'(\xi )}\right)\epsilon
+_n\epsilon _{n-1} +\left(\frac{1}{2}\frac{f\text{''}(\xi )}{f'(\xi )}\right)^2\epsilon _n^2\epsilon _{n-1}\)\\
+We can neglect the first and third terms since \(\epsilon ^3\) will be very small and thus negligible, leaving\\
+\(\epsilon _{n+1}\approx \left(\frac{1}{2}\frac{f\text{''}(\xi )}{f'(\xi )}\right)\epsilon _n\epsilon _{n-1}\)\\
+we can now change the LHS and solve\\
+\(C \epsilon _n^r=\left(\frac{1}{2}\frac{f\text{''}(\xi )}{f'(\xi )}\right)\epsilon _n\epsilon _{n-1}\to  \frac{ \epsilon _n^r}{\epsilon _n}=\frac{1}{C}\left(\frac{1}{2}\frac{f\text{''}(\xi
+)}{f'(\xi )}\right)\epsilon _{n-1}\\
+\\
+ \epsilon _n^{r-1}=\frac{1}{C}\left(\frac{1}{2}\frac{f\text{''}(\xi )}{f'(\xi )}\right)\epsilon _{n-1}\to  \epsilon _n=\left(\frac{1}{2C}\frac{f\text{''}(\xi
+)}{f'(\xi )}\right)^{\frac{1}{r-1}}\epsilon _{n-1}^{\frac{1}{r-1}}\)\\
+Once again, we can plug in the LHS leading to\\
+\(\text{C$\epsilon $}_{n-1}^r=\left(\frac{1}{2C}\frac{f\text{''}(\xi )}{f'(\xi )}\right)^{\frac{1}{r-1}}\epsilon _{n-1}^{\frac{1}{r-1}}\)\\
+This implies then\\
+\(C=\left(\frac{1}{2C}\frac{f\text{''}(\xi )}{f'(\xi )}\right)^{\frac{1}{r-1}}\\
+\\
+r=\frac{1}{r-1}\)\\
+We know the order of convergence must be a positive number, so solving for r yields,\\
+\(r(r-1)=1\\
+\\
+r^2-r-1=0\\
+\\
+r=\frac{-(-1)+\sqrt{1-4(1)(-1)}}{2}=\frac{1+\sqrt{5}}{2}=1.61803\)\\
+so the order of convergence is the Golden Ratio, \(r=\phi =1.618\)
+
+\end{document}
